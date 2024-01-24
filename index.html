@@ -104,10 +104,20 @@
             animation: slideInFromRight 1s ease forwards;
         }
 
-        #imageContainer img {
-            max-width: 100%; /* Ensures the image fits within the container */
-            /* Add more styling as needed */
-        }
+#imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+}
+
+#imageContainer img {
+    max-width: 100%;
+    max-height: 100%;
+    /* Maintain aspect ratio */
+    height: auto;
+    width: auto;
+}
 
 
         /* Hide elements by default */
@@ -156,6 +166,7 @@
         const avoidList = [];
         const maxAvoidSize = 5;
         const totalImages = 20;
+        const imageScale = 0.5; // Scale of the image
         let mainIndex = 0, subIndex = 0;
 
         function typeMainLetter() {
@@ -208,16 +219,17 @@
         }
     }
 
-    function displayImage(imageId) {
-        const imagePath = `images/${imageId}.png`; // Adjust the path as needed
-        const imgElement = document.createElement('img');
-        imgElement.src = imagePath;
-        imgElement.alt = `Image ${imageId}`;
+        function displayImage(imageId) {
+            const imagePath = `images/${imageId}.png`;
+            const imgElement = document.createElement('img');
+            imgElement.src = imagePath;
+            imgElement.alt = `Image ${imageId}`;
+            imgElement.style.transform = `scale(${imageScale})`; // Apply scaling
 
-        const imageContainer = document.getElementById('imageContainer');
-        imageContainer.innerHTML = ''; // Clear previous image
-        imageContainer.appendChild(imgElement);
-    }
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(imgElement);
+        }
 
     function rerollPlayer() {
         const imageId = getRandomImageId();
@@ -248,6 +260,9 @@
             } else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
+                if (menuType === 'main') {
+        document.getElementById('imageContainer').innerHTML = ''; // Clear the image
+    }
         }
 
         function fadeInButtons(menu) {
