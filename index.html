@@ -104,6 +104,12 @@
             animation: slideInFromRight 1s ease forwards;
         }
 
+        #imageContainer img {
+            max-width: 100%; /* Ensures the image fits within the container */
+            /* Add more styling as needed */
+        }
+
+
         /* Hide elements by default */
         .hidden {
             display: none;
@@ -115,6 +121,7 @@
     <!-- Container for the dynamic text -->
     <div id="dynamicText"></div>
     <div id="directorsCut"></div>
+    <div id="imageContainer"></div>
 
     <!-- Main Menu -->
     <div class="centered hidden" id="mainMenu">
@@ -125,7 +132,7 @@
 
     <!-- Player Menu -->
     <div class="centered hidden" id="playerMenu">
-        <button>Reroll player</button>
+    <button id="rerollPlayerButton">Reroll player</button>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
@@ -202,7 +209,7 @@
     }
 
     function displayImage(imageId) {
-        const imagePath = `images/${imageId}.jpg`; // Adjust the path as needed
+        const imagePath = `images/${imageId}.png`; // Adjust the path as needed
         const imgElement = document.createElement('img');
         imgElement.src = imagePath;
         imgElement.alt = `Image ${imageId}`;
