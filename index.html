@@ -12,10 +12,13 @@
         }
 
         /* Centering buttons */
-.centered {
-    text-align: center;
-    margin-top: 2vh; /* Adjust this value as needed */
-}
+        .centered {
+            text-align: center;
+            position: fixed; /* Fix the position relative to the viewport */
+            top: 10px; /* Adjust this value as needed to position from the top */
+            width: 100%; /* Ensure the container spans the full width */
+            z-index: 1000; /* Ensures the menu is above other content */
+        }
 
         /* Button styling */
         button {
