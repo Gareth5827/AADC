@@ -146,6 +146,9 @@
         const subText = "Directors Cut";
         const mainContainer = document.getElementById('dynamicText');
         const subContainer = document.getElementById('directorsCut');
+        const avoidList = [];
+        const maxAvoidSize = 5;
+        const totalImages = 20;
         let mainIndex = 0, subIndex = 0;
 
         function typeMainLetter() {
@@ -182,7 +185,39 @@
                 setTimeout(revealMenu, 500); // Small delay before revealing the menu
             }
         }
+        
+    function getRandomImageId() {
+        let randomId = Math.floor(Math.random() * totalImages) + 1;
+        while (avoidList.includes(randomId)) {
+            randomId = Math.floor(Math.random() * totalImages) + 1;
+        }
+        return randomId;
+    }
 
+    function updateAvoidList(newId) {
+        avoidList.push(newId);
+        if (avoidList.length > maxAvoidSize) {
+            avoidList.shift(); // Remove the oldest entry
+        }
+    }
+
+    function displayImage(imageId) {
+        const imagePath = `images/${imageId}.jpg`; // Adjust the path as needed
+        const imgElement = document.createElement('img');
+        imgElement.src = imagePath;
+        imgElement.alt = `Image ${imageId}`;
+
+        const imageContainer = document.getElementById('imageContainer');
+        imageContainer.innerHTML = ''; // Clear previous image
+        imageContainer.appendChild(imgElement);
+    }
+
+    function rerollPlayer() {
+        const imageId = getRandomImageId();
+        displayImage(imageId);
+        updateAvoidList(imageId);
+    }
+        
         function showMenu(menuType) {
             document.getElementById('mainMenu').classList.add('hidden');
             document.getElementById('playerMenu').classList.add('hidden');
@@ -193,6 +228,8 @@
                 const playerMenu = document.getElementById('playerMenu');
                 playerMenu.classList.remove('hidden');
                 fadeInButtons(playerMenu);
+                            const rerollButton = document.getElementById('rerollPlayerButton');
+            rerollButton.onclick = rerollPlayer; // Attach reroll function to the button
             } else if (menuType === 'host') {
                 const hostMenu = document.getElementById('hostMenu');
                 hostMenu.classList.remove('hidden');
