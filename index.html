@@ -169,7 +169,9 @@
         const avoidList = [];
         const maxAvoidSize = 5;
         const totalImages = 20;
-        const imageScale = 8; // Scale of the image
+        const baseWidth = 1920; // Base width of the image
+        const baseHeight = 1080; // Base height of the image
+        const imageScale = 1; // Scale of the image (1 for 100%)
         let mainIndex = 0, subIndex = 0;
 
         function typeMainLetter() {
@@ -207,38 +209,39 @@
             }
         }
         
-    function getRandomImageId() {
-        let randomId = Math.floor(Math.random() * totalImages) + 1;
-        while (avoidList.includes(randomId)) {
-            randomId = Math.floor(Math.random() * totalImages) + 1;
+        function getRandomImageId() {
+            let randomId = Math.floor(Math.random() * totalImages) + 1;
+            while (avoidList.includes(randomId)) {
+                randomId = Math.floor(Math.random() * totalImages) + 1;
+            }
+            return randomId;
         }
-        return randomId;
-    }
 
-    function updateAvoidList(newId) {
-        avoidList.push(newId);
-        if (avoidList.length > maxAvoidSize) {
-            avoidList.shift(); // Remove the oldest entry
+        function updateAvoidList(newId) {
+            avoidList.push(newId);
+            if (avoidList.length > maxAvoidSize) {
+                avoidList.shift(); // Remove the oldest entry
+            }
         }
-    }
 
         function displayImage(imageId) {
             const imagePath = `images/${imageId}.png`;
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
             imgElement.alt = `Image ${imageId}`;
-            imgElement.style.transform = `scale(${imageScale})`; // Apply scaling
-
+            imgElement.style.width = `${baseWidth * imageScale}px`; // Set width
+            imgElement.style.height = `${baseHeight * imageScale}px`; // Set height
+        
             const imageContainer = document.getElementById('imageContainer');
             imageContainer.innerHTML = '';
             imageContainer.appendChild(imgElement);
         }
 
-    function rerollPlayer() {
-        const imageId = getRandomImageId();
-        displayImage(imageId);
-        updateAvoidList(imageId);
-    }
+        function rerollPlayer() {
+            const imageId = getRandomImageId();
+            displayImage(imageId);
+            updateAvoidList(imageId);
+        }
         
         function showMenu(menuType) {
             document.getElementById('mainMenu').classList.add('hidden');
