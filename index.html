@@ -278,17 +278,20 @@
         
             // Show specific menu
             if (menuType === 'player') {
-                // Player menu logic
-            }
-                        if (menuType === 'host') {
+                const playerMenu = document.getElementById('playerMenu');
+                playerMenu.classList.remove('hidden');
+                fadeInButtons(playerMenu);
+                const rerollButton = document.getElementById('rerollPlayerButton');
+                rerollButton.onclick = rerollPlayer; // Attach rerollPlayer function to the button
+            } else if (menuType === 'host') {
                 const hostMenu = document.getElementById('hostMenu');
                 hostMenu.classList.remove('hidden');
                 fadeInButtons(hostMenu);
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
-            }
-            else if (menuType === 'both') {
+            } else if (menuType === 'both') {
                 // Both menu logic
+                // You might want to add logic here for the 'both' menu
             } else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
@@ -299,7 +302,7 @@
                 document.getElementById('numberDisplay').innerText = '';
             }
         }
-
+        
         function fadeInButtons(menu) {
             Array.from(menu.getElementsByTagName('button')).forEach(button => {
                 button.style.opacity = 1; // Make the buttons visible
