@@ -138,6 +138,7 @@
     <!-- Container for the dynamic text -->
     <div id="dynamicText"></div>
     <div id="directorsCut"></div>
+    <div id="numberDisplay" style="text-align: center; font-size: 24px; margin-top: 20px;"></div>
     <div id="imageContainer"></div>
 
     <!-- Main Menu -->
@@ -273,10 +274,11 @@
             } else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
-                if (menuType === 'main') {
-                    document.getElementById('imageContainer').innerHTML = ''; // Clear the image
-                    document.getElementById('numberDisplay').innerText = ''; // Clear the number
-                }
+
+            if (menuType === 'main') {
+                document.getElementById('imageContainer').innerHTML = ''; // Clear the image
+                document.getElementById('numberDisplay').innerText = ''; // Clear the number
+            }
         }
 
         function fadeInButtons(menu) {
