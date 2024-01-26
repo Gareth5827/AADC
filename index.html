@@ -106,7 +106,10 @@
         #bothButton {
             animation: slideInFromRight 1s ease forwards;
         }
-
+        
+        <div id="numberDisplay" style="text-align: center; font-size: 24px; margin-top: 20px;"></div>
+        <div id="imageContainer"></div>
+        
         #imageContainer {
             display: flex;
             justify-content: center;
@@ -239,6 +242,9 @@
         }
 
         function rerollPlayer() {
+            const randomNumber = Math.floor(Math.random() * 4) + 1; // Generate a number from 1 to 4
+            document.getElementById('numberDisplay').innerText = `Number: ${randomNumber}`;
+        
             const imageId = getRandomImageId();
             displayImage(imageId);
             updateAvoidList(imageId);
@@ -268,8 +274,9 @@
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
                 if (menuType === 'main') {
-        document.getElementById('imageContainer').innerHTML = ''; // Clear the image
-    }
+                    document.getElementById('imageContainer').innerHTML = ''; // Clear the image
+                    document.getElementById('numberDisplay').innerText = ''; // Clear the number
+                }
         }
 
         function fadeInButtons(menu) {
