@@ -110,21 +110,20 @@
         <div id="numberDisplay" style="text-align: center; font-size: 24px; margin-top: 20px;"></div>
         <div id="imageContainer"></div>
         
-        #imageContainer img {
-            max-width: 100%;
-            max-height: 100%;
-            /* Maintain aspect ratio */
-            height: auto;
-            width: auto;
-        }
+            #imageContainer {
+                display: flex;
+                justify-content: center; /* Centers children horizontally */
+                align-items: center; /* Centers children vertically */
+                height: 100vh; /* Full height of the viewport */
+            }
 
-                #numberDisplay {
-            position: fixed; /* Fix the position relative to the viewport */
-            right: 20px; /* 20px from the right side */
-            top: 50%; /* Vertically centered */
-            transform: translateY(-50%); /* Adjust vertical alignment */
-            font-size: 24px; /* Font size */
-        }
+            #numberDisplay {
+                position: fixed; /* Fix the position relative to the viewport */
+                left: 20px; /* 20px from the left side */
+                top: 50%; /* Vertically centered */
+                transform: translateY(-50%); /* Adjust vertical alignment */
+                font-size: 56px; /* Font size */
+            }
 
         /* Hide elements by default */
         .hidden {
