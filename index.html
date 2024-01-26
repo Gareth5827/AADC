@@ -159,7 +159,7 @@
 
     <!-- Host Menu -->
     <div class="centered hidden" id="hostMenu">
-        <button>Reroll scene</button>
+        <button id="rerollHostButton">Reroll scene</button>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
@@ -225,6 +225,11 @@
             return randomId;
         }
 
+                // Function to get a random image ID between 21 and 31
+        function getRandomHostImageId() {
+            return Math.floor(Math.random() * 11) + 21; // Generates a number from 21 to 31
+        }
+
         function updateAvoidList(newId) {
             avoidList.push(newId);
             if (avoidList.length > maxAvoidSize) {
@@ -253,34 +258,45 @@
             displayImage(imageId);
             updateAvoidList(imageId);
         }
+
+        // Reroll logic for the Host
+        function rerollHost() {
+            const randomNumber = Math.floor(Math.random() * 3) + 1; // Generate a number from 1 to 3
+            document.getElementById('numberDisplay').innerText = randomNumber;
+        
+            const imageId = getRandomHostImageId(); // Get random image ID for host
+            displayImage(imageId);
+            updateAvoidList(imageId); // You might want to handle avoid list differently for host
+        }
         
         function showMenu(menuType) {
+            // Hide all menus
             document.getElementById('mainMenu').classList.add('hidden');
             document.getElementById('playerMenu').classList.add('hidden');
             document.getElementById('hostMenu').classList.add('hidden');
             document.getElementById('bothMenu').classList.add('hidden');
-
+        
+            // Show specific menu
             if (menuType === 'player') {
-                const playerMenu = document.getElementById('playerMenu');
-                playerMenu.classList.remove('hidden');
-                fadeInButtons(playerMenu);
-                            const rerollButton = document.getElementById('rerollPlayerButton');
-            rerollButton.onclick = rerollPlayer; // Attach reroll function to the button
-            } else if (menuType === 'host') {
+                // Player menu logic
+            }
+                        if (menuType === 'host') {
                 const hostMenu = document.getElementById('hostMenu');
                 hostMenu.classList.remove('hidden');
                 fadeInButtons(hostMenu);
-            } else if (menuType === 'both') {
-                const bothMenu = document.getElementById('bothMenu');
-                bothMenu.classList.remove('hidden');
-                fadeInButtons(bothMenu);
+                const rerollButton = document.getElementById('rerollHostButton');
+                rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
+            }
+            else if (menuType === 'both') {
+                // Both menu logic
             } else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
-
+        
+            // Clear image and number display when returning to main menu
             if (menuType === 'main') {
-                document.getElementById('imageContainer').innerHTML = ''; // Clear the image
-                document.getElementById('numberDisplay').innerText = ''; // Clear the number
+                document.getElementById('imageContainer').innerHTML = '';
+                document.getElementById('numberDisplay').innerText = '';
             }
         }
 
