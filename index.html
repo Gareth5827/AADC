@@ -110,22 +110,21 @@
         <div id="numberDisplay" style="text-align: center; font-size: 24px; margin-top: 20px;"></div>
         <div id="imageContainer"></div>
         
-        #imageContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        #imageContainer img {
+            max-width: 100%;
+            max-height: 100%;
+            /* Maintain aspect ratio */
             height: auto;
             width: auto;
         }
 
-#imageContainer img {
-    max-width: 100%;
-    max-height: 100%;
-    /* Maintain aspect ratio */
-    height: auto;
-    width: auto;
-}
-
+                #numberDisplay {
+            position: fixed; /* Fix the position relative to the viewport */
+            right: 20px; /* 20px from the right side */
+            top: 50%; /* Vertically centered */
+            transform: translateY(-50%); /* Adjust vertical alignment */
+            font-size: 24px; /* Font size */
+        }
 
         /* Hide elements by default */
         .hidden {
@@ -244,7 +243,7 @@
 
         function rerollPlayer() {
             const randomNumber = Math.floor(Math.random() * 4) + 1; // Generate a number from 1 to 4
-            document.getElementById('numberDisplay').innerText = `Number: ${randomNumber}`;
+            document.getElementById('numberDisplay').innerText = randomNumber; // Display only the number
         
             const imageId = getRandomImageId();
             displayImage(imageId);
