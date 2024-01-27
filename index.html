@@ -326,47 +326,47 @@
             }
         }
         
-        function showMenu(menuType) {
-            // Hide all menus
-            document.getElementById('mainMenu').classList.add('hidden');
-            document.getElementById('playerMenu').classList.add('hidden');
-            document.getElementById('hostMenu').classList.add('hidden');
-            document.getElementById('bothMenu').classList.add('hidden');
-        
-            // Show specific menu
-            if (menuType === 'player') {
-                const playerMenu = document.getElementById('playerMenu');
-                playerMenu.classList.remove('hidden');
-                fadeInButtons(playerMenu);
-                const rerollButton = document.getElementById('rerollPlayerButton');
-                rerollButton.onclick = rerollPlayer; // Attach rerollPlayer function to the button
-            } else if (menuType === 'host') {
-                const hostMenu = document.getElementById('hostMenu');
-                hostMenu.classList.remove('hidden');
-                fadeInButtons(hostMenu);
-                const rerollButton = document.getElementById('rerollHostButton');
-                rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
-            }
-            if (menuType === 'both') {
-                const bothMenu = document.getElementById('bothMenu');
-                bothMenu.classList.remove('hidden');
-                fadeInButtons(bothMenu);
-                const rerollButton = document.getElementById('rerollBothButton');
-                const switchButton = document.getElementById('switchButton');
-                rerollButton.onclick = rerollBoth;
-                switchButton.onclick = switchDisplay;
-                rerollBoth(); // Perform initial reroll when the menu is shown
-            }
-            else {
-                document.getElementById('mainMenu').classList.remove('hidden');
-            }
-        
-            // Clear image and number display when returning to main menu
-            if (menuType === 'main') {
-                document.getElementById('imageContainer').innerHTML = '';
-                document.getElementById('numberDisplay').innerText = '';
-            }
+    function showMenu(menuType) {
+        // Hide all menus
+        document.getElementById('mainMenu').classList.add('hidden');
+        document.getElementById('playerMenu').classList.add('hidden');
+        document.getElementById('hostMenu').classList.add('hidden');
+        document.getElementById('bothMenu').classList.add('hidden');
+
+        if (menuType === 'player') {
+            const playerMenu = document.getElementById('playerMenu');
+            playerMenu.classList.remove('hidden');
+            fadeInButtons(playerMenu);
+            const rerollButton = document.getElementById('rerollPlayerButton');
+            rerollButton.onclick = rerollPlayer; // Attach rerollPlayer function to the button
+            rerollPlayer(); // Perform initial reroll when the menu is shown
+        } else if (menuType === 'host') {
+            const hostMenu = document.getElementById('hostMenu');
+            hostMenu.classList.remove('hidden');
+            fadeInButtons(hostMenu);
+            const rerollButton = document.getElementById('rerollHostButton');
+            rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
+            rerollHost(); // Perform initial reroll when the menu is shown
+        } else if (menuType === 'both') {
+            // Both menu logic
+            const bothMenu = document.getElementById('bothMenu');
+            bothMenu.classList.remove('hidden');
+            fadeInButtons(bothMenu);
+            const rerollButton = document.getElementById('rerollBothButton');
+            const switchButton = document.getElementById('switchButton');
+            rerollButton.onclick = rerollBoth;
+            switchButton.onclick = switchDisplay;
+            rerollBoth(); // Perform initial reroll when the menu is shown
+        } else {
+            document.getElementById('mainMenu').classList.remove('hidden');
         }
+
+        // Clear image and number display when returning to main menu
+        if (menuType === 'main') {
+            document.getElementById('imageContainer').innerHTML = '';
+            document.getElementById('numberDisplay').innerText = '';
+        }
+    }
         
         function fadeInButtons(menu) {
             Array.from(menu.getElementsByTagName('button')).forEach(button => {
