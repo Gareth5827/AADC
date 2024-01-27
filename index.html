@@ -76,7 +76,7 @@
         }
 
         /* Style for the player, host, and both menu buttons */
-        #playerMenu button, #hostMenu button, #bothMenu button {
+        #playerMenu button, #hostMenu button {
             animation: fadeIn 0.4s ease-out; /* Fade-in effect */
             opacity: 0; /* Start invisible */
             position: fixed; /* Position relative to the viewport */
@@ -84,12 +84,12 @@
         }
 
             /* Positioning for the first button (Reroll) in each menu */
-            #playerMenu button:nth-child(1), #hostMenu button:nth-child(1), #bothMenu button:nth-child(1) {
+            #playerMenu button:nth-child(1), #hostMenu button:nth-child(1) {
                 right: 30px; /* Near the bottom right */
             }
 
             /* Positioning for the second button (Back) in each menu */
-            #playerMenu button:nth-child(2), #hostMenu button:nth-child(2), #bothMenu button:nth-child(2) {
+            #playerMenu button:nth-child(2), #hostMenu button:nth-child(2) {
                 left: 30px; /* Near the bottom left */
             }
 
@@ -100,10 +100,6 @@
         
         #hostButton {
             animation: slideInFromTop 1s ease forwards;
-        }
-        
-        #bothButton {
-            animation: slideInFromRight 1s ease forwards;
         }
         
         #imageContainer {
@@ -160,12 +156,6 @@
     <!-- Host Menu -->
     <div class="centered hidden" id="hostMenu">
         <button id="rerollHostButton">Reroll scene</button>
-        <button onclick="showMenu('main')">Back</button>
-    </div>
-
-    <!-- Both Menu -->
-    <div class="centered hidden" id="bothMenu">
-        <button>Reroll both</button>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
@@ -274,7 +264,6 @@
             document.getElementById('mainMenu').classList.add('hidden');
             document.getElementById('playerMenu').classList.add('hidden');
             document.getElementById('hostMenu').classList.add('hidden');
-            document.getElementById('bothMenu').classList.add('hidden');
         
             // Show specific menu
             if (menuType === 'player') {
@@ -289,9 +278,6 @@
                 fadeInButtons(hostMenu);
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
-            } else if (menuType === 'both') {
-                // Both menu logic
-                // You might want to add logic here for the 'both' menu
             } else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
