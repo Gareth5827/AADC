@@ -196,6 +196,7 @@
         <div id="bothPlayerNumberDisplay"></div>
         <div id="bothHostDisplay" class="imageContainer"></div>
         <div id="bothHostNumberDisplay"></div>
+        <button onclick="showMenu('main')">Back</button>
     </div>
 
     <script>
@@ -285,6 +286,7 @@
         
             const imageId = getRandomImageId();
             displayImage(imageId);
+            displayImage(imageId, 'imageContainer');
             updateAvoidList(imageId);
         }
 
@@ -295,6 +297,7 @@
         
             const imageId = getRandomHostImageId(); // Get random image ID for host
             displayImage(imageId);
+            displayImage(imageId, 'imageContainer');
             updateAvoidList(imageId); // You might want to handle avoid list differently for host
         }
 
