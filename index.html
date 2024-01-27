@@ -93,6 +93,19 @@
                 left: 30px; /* Near the bottom left */
             }
 
+        #bothMenu button:nth-child(1) { /* Back button */
+            left: 30px;
+        }
+        
+        #bothMenu button:nth-child(2) { /* Switch button */
+            left: 50%; /* Center */
+            transform: translateX(-50%); /* Adjust for button width */
+        }
+        
+        #bothMenu button:nth-child(3) { /* Reroll Both button */
+            right: 30px;
+        }
+
         #bothPlayerDisplay, #bothHostDisplay {
             display: none; /* Initially hidden */
             justify-content: center;
@@ -325,6 +338,11 @@
                 hostNumberDisplay.style.display = 'block';
             }
         }
+
+        function displayNumber(number, elementId) {
+    const numberDisplay = document.getElementById(elementId);
+    numberDisplay.innerText = number;
+}
         
     function showMenu(menuType) {
         // Hide all menus
