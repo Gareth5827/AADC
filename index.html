@@ -353,11 +353,11 @@
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
                 rerollHost();
             }
-                else if (menuType === 'both') {
-        const bothMenu = document.getElementById('bothMenu');
-        bothMenu.classList.remove('hidden');
-        fadeInButtons(bothMenu); // Ensure this is called for the Both menu
-            }
+            else if (menuType === 'both') {
+                    const bothMenu = document.getElementById('bothMenu');
+                    bothMenu.classList.remove('hidden');
+                    fadeInButtons(bothMenu); // Ensure fadeInButtons is called
+                }
             else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
@@ -370,9 +370,10 @@
         }
         
         function fadeInButtons(menu) {
-            Array.from(menu.getElementsByTagName('button')).forEach(button => {
-                button.style.opacity = 1; // Make the buttons visible
-            });
+            const buttons = menu.getElementsByTagName('button');
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].style.opacity = 1; // Explicitly set opacity to 1
+            }
         }
         typeMainLetter();
     </script>
