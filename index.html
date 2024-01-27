@@ -352,11 +352,13 @@
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
                 rerollHost();
-            } else if (menuType === 'both') {
-                const bothMenu = document.getElementById('bothMenu');
-                bothMenu.classList.remove('hidden');
-                fadeInButtons(bothMenu);
-            } else {
+            }
+                else if (menuType === 'both') {
+        const bothMenu = document.getElementById('bothMenu');
+        bothMenu.classList.remove('hidden');
+        fadeInButtons(bothMenu); // Ensure this is called for the Both menu
+            }
+            else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
         
