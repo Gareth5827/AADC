@@ -92,10 +92,6 @@
             #playerMenu button:nth-child(2), #hostMenu button:nth-child(2), #bothMenu button:nth-child(2) {
                 left: 30px; /* Near the bottom left */
             }
-
-        #bothMenu button:nth-child(1) { /* Back button */
-            left: 30px;
-        }
         
         #bothMenu button:nth-child(2) { /* Switch button */
             left: 50%; /* Center */
@@ -270,7 +266,7 @@
             }
         }
 
-        function displayImage(imageId) {
+        function displayImage(imageId, containerId) {
             const imagePath = `images/${imageId}.png`;
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
@@ -278,7 +274,7 @@
             imgElement.style.width = `800px`;
             imgElement.style.height = `450px`;
         
-            const imageContainer = document.getElementById('imageContainer');
+            const imageContainer = document.getElementById(containerId);
             imageContainer.innerHTML = '';
             imageContainer.appendChild(imgElement);
         }
