@@ -311,8 +311,9 @@
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
                 rerollHost();
             } else if (menuType === 'both') {
-                // Both menu logic
-                // You might want to add logic here for the 'both' menu
+                const bothMenu = document.getElementById('bothMenu');
+                bothMenu.classList.remove('hidden');
+                fadeInButtons(bothMenu);
             } else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
