@@ -93,14 +93,14 @@
                 left: 30px; /* Near the bottom left */
             }
 
-                #bothPlayerDisplay, #bothHostDisplay {
+        #bothPlayerDisplay, #bothHostDisplay {
             display: none; /* Initially hidden */
             justify-content: center;
             align-items: center;
             height: 80vh;
         }
 
-        #bothNumberDisplay {
+        #bothPlayerNumberDisplay, #bothHostNumberDisplay {
             position: fixed;
             right: 30px; /* Adjust as needed */
             top: 50%;
@@ -180,12 +180,13 @@
 
     <!-- Both Menu -->
     <div class="centered hidden" id="bothMenu">
-        <button id="rerollBothButton">Reroll both</button>
-        <button id="switchButton">Switch</button>
         <button onclick="showMenu('main')">Back</button>
+        <button id="switchButton">Switch</button>
+        <button id="rerollBothButton">Reroll both</button>
         <div id="bothPlayerDisplay" class="imageContainer"></div>
-        <div id="bothNumberDisplay"></div>
+        <div id="bothPlayerNumberDisplay"></div>
         <div id="bothHostDisplay" class="imageContainer"></div>
+        <div id="bothHostNumberDisplay"></div>
     </div>
 
     <script>
@@ -288,33 +289,40 @@
             updateAvoidList(imageId); // You might want to handle avoid list differently for host
         }
 
-                function rerollBoth() {
-            // Logic for rerolling both
+        function rerollBoth() {
             const playerImageId = getRandomImageId();
             const hostImageId = getRandomHostImageId();
             const playerNumber = Math.floor(Math.random() * 4) + 1;
             const hostNumber = Math.floor(Math.random() * 3) + 1;
 
             displayImage(playerImageId, 'bothPlayerDisplay');
-            displayNumber(playerNumber, 'bothNumberDisplay');
+            displayNumber(playerNumber, 'bothPlayerNumberDisplay');
             displayImage(hostImageId, 'bothHostDisplay');
-            displayNumber(hostNumber, 'bothNumberDisplay');
+            displayNumber(hostNumber, 'bothHostNumberDisplay');
 
             // Show player display by default
             document.getElementById('bothPlayerDisplay').style.display = 'flex';
             document.getElementById('bothHostDisplay').style.display = 'none';
+            document.getElementById('bothPlayerNumberDisplay').style.display = 'block';
+            document.getElementById('bothHostNumberDisplay').style.display = 'none';
         }
 
         function switchDisplay() {
-            // Toggle between player and host displays
             const playerDisplay = document.getElementById('bothPlayerDisplay');
             const hostDisplay = document.getElementById('bothHostDisplay');
+            const playerNumberDisplay = document.getElementById('bothPlayerNumberDisplay');
+            const hostNumberDisplay = document.getElementById('bothHostNumberDisplay');
+            
             if (playerDisplay.style.display === 'none') {
                 playerDisplay.style.display = 'flex';
+                playerNumberDisplay.style.display = 'block';
                 hostDisplay.style.display = 'none';
+                hostNumberDisplay.style.display = 'none';
             } else {
                 playerDisplay.style.display = 'none';
+                playerNumberDisplay.style.display = 'none';
                 hostDisplay.style.display = 'flex';
+                hostNumberDisplay.style.display = 'block';
             }
         }
         
@@ -339,7 +347,7 @@
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
             }
-                else if (menuType === 'both') {
+            if (menuType === 'both') {
                 const bothMenu = document.getElementById('bothMenu');
                 bothMenu.classList.remove('hidden');
                 fadeInButtons(bothMenu);
@@ -347,6 +355,7 @@
                 const switchButton = document.getElementById('switchButton');
                 rerollButton.onclick = rerollBoth;
                 switchButton.onclick = switchDisplay;
+                rerollBoth(); // Perform initial reroll when the menu is shown
             }
             else {
                 document.getElementById('mainMenu').classList.remove('hidden');
