@@ -20,20 +20,6 @@
             z-index: 1000; /* Ensures the menu is above other content */
         }
 
-                .displayContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh; /* Same height as imageContainer */
-        }
-        
-        .displayContainer img {
-            max-width: 80%;
-            max-height: 100%;
-            height: auto;
-            width: auto;
-        }
-
         /* Button styling */
         button {
             margin: 5px;
@@ -96,16 +82,16 @@
             position: fixed; /* Position relative to the viewport */
             bottom: 10px; /* Near the bottom of the screen */
         }
-        
-        /* Positioning for the first button (Reroll) in player and host menus */
-        #playerMenu button:nth-child(1), #hostMenu button:nth-child(1) {
-            right: 30px; /* Near the bottom right */
-        }
-        
-        /* Positioning for the second button (Back) in player and host menus */
-        #playerMenu button:nth-child(2), #hostMenu button:nth-child(2) {
-            left: 30px; /* Near the bottom left */
-        }
+
+            /* Positioning for the first button (Reroll) in each menu */
+            #playerMenu button:nth-child(1), #hostMenu button:nth-child(1), #bothMenu button:nth-child(1) {
+                right: 30px; /* Near the bottom right */
+            }
+
+            /* Positioning for the second button (Back) in each menu */
+            #playerMenu button:nth-child(2), #hostMenu button:nth-child(2), #bothMenu button:nth-child(2) {
+                left: 30px; /* Near the bottom left */
+            }
 
         /* Assign animations to buttons */
         #playerButton {
@@ -157,8 +143,6 @@
     <div id="directorsCut"></div>
     <div id="numberDisplay"></div>
     <div id="imageContainer"></div>
-    <div id="BothPlayerDisplay" class="displayContainer hidden"></div>
-    <div id="BothHostDisplay" class="displayContainer hidden"></div>
 
     <!-- Main Menu -->
     <div class="centered hidden" id="mainMenu">
@@ -181,7 +165,7 @@
 
     <!-- Both Menu -->
     <div class="centered hidden" id="bothMenu">
-        <button id="rerollBothButton">Reroll both</button>
+        <button>Reroll both</button>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
@@ -284,50 +268,6 @@
             displayImage(imageId);
             updateAvoidList(imageId); // You might want to handle avoid list differently for host
         }
-
-        function rerollBoth() {
-            // Generate numbers for both player and host
-            const playerNumber = Math.floor(Math.random() * 4) + 1;
-            const hostNumber = Math.floor(Math.random() * 3) + 1;
-        
-            // Generate image IDs for both player and host
-            const playerImageId = getRandomImageId(); // Image ID 1-20
-            const hostImageId = getRandomHostImageId(); // Image ID 21-31
-        
-            // Update BothPlayerDisplay
-            updateDisplay('BothPlayerDisplay', playerImageId, playerNumber);
-            // Update BothHostDisplay
-            updateDisplay('BothHostDisplay', hostImageId, hostNumber);
-        
-            // Initially show BothPlayerDisplay and hide BothHostDisplay
-            document.getElementById('BothPlayerDisplay').classList.remove('hidden');
-            document.getElementById('BothHostDisplay').classList.add('hidden');
-        }
-        
-        function updateDisplay(displayId, imageId, number) {
-            const display = document.getElementById(displayId);
-            display.innerHTML = `<img src="images/${imageId}.png" alt="Image ${imageId}" style="max-width: 80%; max-height: 100%; height: auto; width: auto;"><span style="font-size: 160px; color: black;">${number}</span>`;
-            // Adjust the color as needed to ensure visibility
-        }
-        
-        function toggleDisplay() {
-            const bothPlayerDisplay = document.getElementById('BothPlayerDisplay');
-            const bothHostDisplay = document.getElementById('BothHostDisplay');
-        
-            if (bothPlayerDisplay.classList.contains('hidden')) {
-                bothPlayerDisplay.classList.remove('hidden');
-                bothHostDisplay.classList.add('hidden');
-            } else {
-                bothPlayerDisplay.classList.add('hidden');
-                bothHostDisplay.classList.remove('hidden');
-            }
-        }
-        
-        // Attach toggleDisplay function to the Switch button
-        document.getElementById('switchButton').onclick = toggleDisplay;
-    
-    // Attach rerollBoth function to the rerollBothButton
-    document.getElementById('rerollBothButton').onclick = rerollBoth;
         
         function showMenu(menuType) {
             // Hide all menus
@@ -343,21 +283,16 @@
                 fadeInButtons(playerMenu);
                 const rerollButton = document.getElementById('rerollPlayerButton');
                 rerollButton.onclick = rerollPlayer; // Attach rerollPlayer function to the button
-                rerollPlayer();
             } else if (menuType === 'host') {
                 const hostMenu = document.getElementById('hostMenu');
                 hostMenu.classList.remove('hidden');
                 fadeInButtons(hostMenu);
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
-                rerollHost();
-            }
-            else if (menuType === 'both') {
-                    const bothMenu = document.getElementById('bothMenu');
-                    bothMenu.classList.remove('hidden');
-                    fadeInButtons(bothMenu); // Ensure fadeInButtons is called
-                }
-            else {
+            } else if (menuType === 'both') {
+                // Both menu logic
+                // You might want to add logic here for the 'both' menu
+            } else {
                 document.getElementById('mainMenu').classList.remove('hidden');
             }
         
@@ -369,11 +304,9 @@
         }
         
         function fadeInButtons(menu) {
-            const buttons = menu.getElementsByTagName('button');
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].style.display = 'block'; // Explicitly set display to block
-                buttons[i].style.opacity = 1;       // Explicitly set opacity to 1
-            }
+            Array.from(menu.getElementsByTagName('button')).forEach(button => {
+                button.style.opacity = 1; // Make the buttons visible
+            });
         }
         typeMainLetter();
     </script>
