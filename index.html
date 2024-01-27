@@ -20,6 +20,20 @@
             z-index: 1000; /* Ensures the menu is above other content */
         }
 
+                .displayContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; /* Same height as imageContainer */
+        }
+        
+        .displayContainer img {
+            max-width: 80%;
+            max-height: 100%;
+            height: auto;
+            width: auto;
+        }
+
         /* Button styling */
         button {
             margin: 5px;
@@ -82,13 +96,15 @@
             position: fixed; /* Position relative to the viewport */
             bottom: 10px; /* Near the bottom of the screen */
         }
-
-        #bothMenu button:nth-child(1) {
-            left: 30px; /* Position the 'Back' button on the left */
+        
+        /* Positioning for the first button (Reroll) in player and host menus */
+        #playerMenu button:nth-child(1), #hostMenu button:nth-child(1) {
+            right: 30px; /* Near the bottom right */
         }
         
-        #bothMenu button:nth-child(3) {
-            right: 30px; /* Position the 'Reroll Both' button on the right */
+        /* Positioning for the second button (Back) in player and host menus */
+        #playerMenu button:nth-child(2), #hostMenu button:nth-child(2) {
+            left: 30px; /* Near the bottom left */
         }
 
         /* Assign animations to buttons */
@@ -291,8 +307,7 @@
         
         function updateDisplay(displayId, imageId, number) {
             const display = document.getElementById(displayId);
-            display.innerHTML = `<img src="images/${imageId}.png" alt="Image ${imageId}"><span>${number}</span>`;
-            // Add any additional formatting or elements as needed
+            display.innerHTML = `<img src="images/${imageId}.png" alt="Image ${imageId}" style="max-width: 80%; max-height: 100%; height: auto; width: auto;"><span style="font-size: 160px;">${number}</span>`;
         }
         
         function toggleDisplay() {
