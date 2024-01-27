@@ -181,9 +181,8 @@
 
     <!-- Both Menu -->
     <div class="centered hidden" id="bothMenu">
-        <button onclick="showMenu('main')">Back</button>
-        <button id="switchButton">Switch</button>
         <button id="rerollBothButton">Reroll both</button>
+        <button onclick="showMenu('main')">Back</button>
     </div>
 
     <script>
@@ -372,7 +371,8 @@
         function fadeInButtons(menu) {
             const buttons = menu.getElementsByTagName('button');
             for (let i = 0; i < buttons.length; i++) {
-                buttons[i].style.opacity = 1; // Explicitly set opacity to 1
+                buttons[i].style.display = 'block'; // Explicitly set display to block
+                buttons[i].style.opacity = 1;       // Explicitly set opacity to 1
             }
         }
         typeMainLetter();
