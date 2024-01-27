@@ -92,30 +92,6 @@
             #playerMenu button:nth-child(2), #hostMenu button:nth-child(2), #bothMenu button:nth-child(2) {
                 left: 30px; /* Near the bottom left */
             }
-        
-        #bothMenu button:nth-child(2) { /* Switch button */
-            left: 50%; /* Center */
-            transform: translateX(-50%); /* Adjust for button width */
-        }
-        
-        #bothMenu button:nth-child(3) { /* Reroll Both button */
-            right: 30px;
-        }
-
-        #bothPlayerDisplay, #bothHostDisplay {
-            display: none; /* Initially hidden */
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-        }
-
-        #bothPlayerNumberDisplay, #bothHostNumberDisplay {
-            position: fixed;
-            right: 30px; /* Adjust as needed */
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 160px;
-        }
 
         /* Assign animations to buttons */
         #playerButton {
@@ -189,13 +165,7 @@
 
     <!-- Both Menu -->
     <div class="centered hidden" id="bothMenu">
-        <button onclick="showMenu('main')">Back</button>
-        <button id="switchButton">Switch</button>
-        <button id="rerollBothButton">Reroll both</button>
-        <div id="bothPlayerDisplay" class="imageContainer"></div>
-        <div id="bothPlayerNumberDisplay"></div>
-        <div id="bothHostDisplay" class="imageContainer"></div>
-        <div id="bothHostNumberDisplay"></div>
+        <button>Reroll both</button>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
@@ -267,7 +237,7 @@
             }
         }
 
-        function displayImage(imageId, containerId) {
+        function displayImage(imageId) {
             const imagePath = `images/${imageId}.png`;
             const imgElement = document.createElement('img');
             imgElement.src = imagePath;
@@ -275,7 +245,7 @@
             imgElement.style.width = `800px`;
             imgElement.style.height = `450px`;
         
-            const imageContainer = document.getElementById(containerId);
+            const imageContainer = document.getElementById('imageContainer');
             imageContainer.innerHTML = '';
             imageContainer.appendChild(imgElement);
         }
@@ -286,7 +256,6 @@
         
             const imageId = getRandomImageId();
             displayImage(imageId);
-            displayImage(imageId, 'imageContainer');
             updateAvoidList(imageId);
         }
 
@@ -297,93 +266,42 @@
         
             const imageId = getRandomHostImageId(); // Get random image ID for host
             displayImage(imageId);
-            displayImage(imageId, 'imageContainer');
             updateAvoidList(imageId); // You might want to handle avoid list differently for host
         }
-
-        function rerollBoth() {
-            const playerImageId = getRandomImageId();
-            const hostImageId = getRandomHostImageId();
-            const playerNumber = Math.floor(Math.random() * 4) + 1;
-            const hostNumber = Math.floor(Math.random() * 3) + 1;
         
-            displayImage(playerImageId, 'bothPlayerDisplay');
-            displayNumber(playerNumber, 'bothPlayerNumberDisplay');
-            displayImage(hostImageId, 'bothHostDisplay');
-            displayNumber(hostNumber, 'bothHostNumberDisplay');
+        function showMenu(menuType) {
+            // Hide all menus
+            document.getElementById('mainMenu').classList.add('hidden');
+            document.getElementById('playerMenu').classList.add('hidden');
+            document.getElementById('hostMenu').classList.add('hidden');
+            document.getElementById('bothMenu').classList.add('hidden');
         
-            // Show player display by default
-            document.getElementById('bothPlayerDisplay').style.display = 'flex';
-            document.getElementById('bothHostDisplay').style.display = 'none';
-            document.getElementById('bothPlayerNumberDisplay').style.display = 'block';
-            document.getElementById('bothHostNumberDisplay').style.display = 'none';
-        }
-        
-        function switchDisplay() {
-            const playerDisplay = document.getElementById('bothPlayerDisplay');
-            const hostDisplay = document.getElementById('bothHostDisplay');
-            const playerNumberDisplay = document.getElementById('bothPlayerNumberDisplay');
-            const hostNumberDisplay = document.getElementById('bothHostNumberDisplay');
-            
-            if (playerDisplay.style.display === 'none') {
-                playerDisplay.style.display = 'flex';
-                playerNumberDisplay.style.display = 'block';
-                hostDisplay.style.display = 'none';
-                hostNumberDisplay.style.display = 'none';
+            // Show specific menu
+            if (menuType === 'player') {
+                const playerMenu = document.getElementById('playerMenu');
+                playerMenu.classList.remove('hidden');
+                fadeInButtons(playerMenu);
+                const rerollButton = document.getElementById('rerollPlayerButton');
+                rerollButton.onclick = rerollPlayer; // Attach rerollPlayer function to the button
+            } else if (menuType === 'host') {
+                const hostMenu = document.getElementById('hostMenu');
+                hostMenu.classList.remove('hidden');
+                fadeInButtons(hostMenu);
+                const rerollButton = document.getElementById('rerollHostButton');
+                rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
+            } else if (menuType === 'both') {
+                // Both menu logic
+                // You might want to add logic here for the 'both' menu
             } else {
-                playerDisplay.style.display = 'none';
-                playerNumberDisplay.style.display = 'none';
-                hostDisplay.style.display = 'flex';
-                hostNumberDisplay.style.display = 'block';
+                document.getElementById('mainMenu').classList.remove('hidden');
+            }
+        
+            // Clear image and number display when returning to main menu
+            if (menuType === 'main') {
+                document.getElementById('imageContainer').innerHTML = '';
+                document.getElementById('numberDisplay').innerText = '';
             }
         }
-
-        function displayNumber(number, elementId) {
-    const numberDisplay = document.getElementById(elementId);
-    numberDisplay.innerText = number;
-}
-        
-    function showMenu(menuType) {
-        // Hide all menus
-        document.getElementById('mainMenu').classList.add('hidden');
-        document.getElementById('playerMenu').classList.add('hidden');
-        document.getElementById('hostMenu').classList.add('hidden');
-        document.getElementById('bothMenu').classList.add('hidden');
-
-        if (menuType === 'player') {
-            const playerMenu = document.getElementById('playerMenu');
-            playerMenu.classList.remove('hidden');
-            fadeInButtons(playerMenu);
-            const rerollButton = document.getElementById('rerollPlayerButton');
-            rerollButton.onclick = rerollPlayer; // Attach rerollPlayer function to the button
-            rerollPlayer(); // Perform initial reroll when the menu is shown
-        } else if (menuType === 'host') {
-            const hostMenu = document.getElementById('hostMenu');
-            hostMenu.classList.remove('hidden');
-            fadeInButtons(hostMenu);
-            const rerollButton = document.getElementById('rerollHostButton');
-            rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
-            rerollHost(); // Perform initial reroll when the menu is shown
-        } else if (menuType === 'both') {
-            // Both menu logic
-            const bothMenu = document.getElementById('bothMenu');
-            bothMenu.classList.remove('hidden');
-            fadeInButtons(bothMenu);
-            const rerollButton = document.getElementById('rerollBothButton');
-            const switchButton = document.getElementById('switchButton');
-            rerollButton.onclick = rerollBoth;
-            switchButton.onclick = switchDisplay;
-            rerollBoth(); // Perform initial reroll when the menu is shown
-        } else {
-            document.getElementById('mainMenu').classList.remove('hidden');
-        }
-
-        // Clear image and number display when returning to main menu
-        if (menuType === 'main') {
-            document.getElementById('imageContainer').innerHTML = '';
-            document.getElementById('numberDisplay').innerText = '';
-        }
-    }
         
         function fadeInButtons(menu) {
             Array.from(menu.getElementsByTagName('button')).forEach(button => {
