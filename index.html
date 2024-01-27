@@ -307,7 +307,8 @@
         
         function updateDisplay(displayId, imageId, number) {
             const display = document.getElementById(displayId);
-            display.innerHTML = `<img src="images/${imageId}.png" alt="Image ${imageId}" style="max-width: 80%; max-height: 100%; height: auto; width: auto;"><span style="font-size: 160px;">${number}</span>`;
+            display.innerHTML = `<img src="images/${imageId}.png" alt="Image ${imageId}" style="max-width: 80%; max-height: 100%; height: auto; width: auto;"><span style="font-size: 160px; color: black;">${number}</span>`;
+            // Adjust the color as needed to ensure visibility
         }
         
         function toggleDisplay() {
@@ -325,9 +326,6 @@
         
         // Attach toggleDisplay function to the Switch button
         document.getElementById('switchButton').onclick = toggleDisplay;
-        
-        // Call rerollBoth initially to populate both displays
-        rerollBoth();
     
     // Attach rerollBoth function to the rerollBothButton
     document.getElementById('rerollBothButton').onclick = rerollBoth;
