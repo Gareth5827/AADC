@@ -294,19 +294,19 @@
             const hostImageId = getRandomHostImageId();
             const playerNumber = Math.floor(Math.random() * 4) + 1;
             const hostNumber = Math.floor(Math.random() * 3) + 1;
-
+        
             displayImage(playerImageId, 'bothPlayerDisplay');
             displayNumber(playerNumber, 'bothPlayerNumberDisplay');
             displayImage(hostImageId, 'bothHostDisplay');
             displayNumber(hostNumber, 'bothHostNumberDisplay');
-
+        
             // Show player display by default
             document.getElementById('bothPlayerDisplay').style.display = 'flex';
             document.getElementById('bothHostDisplay').style.display = 'none';
             document.getElementById('bothPlayerNumberDisplay').style.display = 'block';
             document.getElementById('bothHostNumberDisplay').style.display = 'none';
         }
-
+        
         function switchDisplay() {
             const playerDisplay = document.getElementById('bothPlayerDisplay');
             const hostDisplay = document.getElementById('bothHostDisplay');
