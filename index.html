@@ -20,6 +20,13 @@
             z-index: 1000; /* Ensures the menu is above other content */
         }
 
+                .tutorialText {
+            max-width: 90%; /* You can adjust this value as needed */
+            margin: 0 auto; /* Centers the text block */
+            text-align: left; /* Aligns text to the left */
+            padding: 10px; /* Adds some padding around the text */
+        }
+
         /* Button styling */
         button {
             margin: 5px;
@@ -165,11 +172,11 @@
 
     <!-- Tutorial Menu -->
     <div class="centered hidden" id="tutorialMenu">
-        <div id="tutorialText1">[Placeholder for Tutorial Text 1]</div>
-        <img id="tutorialImage1" src="" alt="Tutorial Image 1" style="width: 1536px; height: 864px;">
-        <div id="tutorialText2">[Placeholder for Tutorial Text 2]</div>
-        <img id="tutorialImage2" src="" alt="Tutorial Image 2" style="width: 1536px; height: 864px;">
-        <div id="tutorialText3">[Placeholder for Tutorial Text 3]</div>
+    <div id="tutorialText1" class="tutorialText">[Placeholder for Tutorial Text 1]</div>
+    <img id="tutorialImage1" src="" alt="Tutorial Image 1" style="width: 1536px; height: 864px;">
+    <div id="tutorialText2" class="tutorialText">[Placeholder for Tutorial Text 2]</div>
+    <img id="tutorialImage2" src="" alt="Tutorial Image 2" style="width: 1536px; height: 864px;">
+    <div id="tutorialText3" class="tutorialText">[Placeholder for Tutorial Text 3]</div>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
