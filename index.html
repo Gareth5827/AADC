@@ -13,6 +13,7 @@
 
         /* Adjust the styling for the tutorial menu */
         #tutorialMenu {
+            margin-top: 70px;
             position: relative; /* Adjusts the position */
             width: 100%; /* Full width */
             max-width: 800px; /* Adjust as needed */
@@ -35,16 +36,19 @@
             overflow-y: auto; /* Enables vertical scrolling */
         }
 
-        /* Centering buttons */
         .centered {
             text-align: center;
-            position: fixed; /* Fix the position relative to the viewport */
-            top: 80px; /* Adjust this value as needed to position from the top */
             width: 100%; /* Ensure the container spans the full width */
             z-index: 1000; /* Ensures the menu is above other content */
         }
+        
+        /* If the fixed position is only needed for the main menu, specify it only for that menu */
+        #mainMenu.centered {
+            position: fixed; /* Fix the position relative to the viewport */
+            top: 80px; /* Adjust this value as needed to position from the top */
+        }
 
-                .tutorialText {
+        .tutorialText {
             max-width: 90%; /* You can adjust this value as needed */
             margin: 0 auto; /* Centers the text block */
             text-align: left; /* Aligns text to the left */
