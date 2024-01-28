@@ -11,23 +11,28 @@
             margin-top: 10px;
         }
 
-        #tutorialMenu img {
-            max-width: 1536px;
-            max-height: 864px;
-            width: 100%; /* Adjusts the image width to fit the container */
-            height: auto; /* Maintains the aspect ratio */
-        }
-
-        body {
-            overflow-y: auto; /* Enables vertical scrolling */
-        }
-        
+        /* Adjust the styling for the tutorial menu */
         #tutorialMenu {
             position: relative; /* Adjusts the position */
             width: 100%; /* Full width */
             max-width: 800px; /* Adjust as needed */
             margin: auto; /* Centers the menu */
-            padding-bottom: 20px; /* Adds space at the bottom */
+            padding: 20px 0; /* Adds padding at the top and bottom */
+            box-sizing: border-box; /* Ensures padding is included in width */
+        }
+        
+        /* Ensure that the image container doesn't create unnecessary space */
+        #tutorialMenu img {
+            display: block; /* Removes any default inline spacing */
+            max-width: 1152px;
+            max-height: 648px;
+            width: 100%; /* Adjusts the image width to fit the container */
+            height: auto; /* Maintains the aspect ratio */
+            margin: 20px auto; /* Centers the image and adds vertical spacing */
+        }
+
+        body {
+            overflow-y: auto; /* Enables vertical scrolling */
         }
 
         /* Centering buttons */
@@ -191,11 +196,11 @@
 
     <!-- Tutorial Menu -->
     <div class="centered hidden" id="tutorialMenu">
-    <div id="tutorialText1" class="tutorialText">[Placeholder for Tutorial Text 1]</div>
-    <img id="tutorialImage1" src="" alt="Tutorial Image 1" style="width: 1536px; height: 864px;">
-    <div id="tutorialText2" class="tutorialText">[Placeholder for Tutorial Text 2]</div>
-    <img id="tutorialImage2" src="" alt="Tutorial Image 2" style="width: 1536px; height: 864px;">
-    <div id="tutorialText3" class="tutorialText">[Placeholder for Tutorial Text 3]</div>
+        <div id="tutorialText1" class="tutorialText">[Your Tutorial Text 1]</div>
+        <img id="tutorialImage1" src="" alt="Tutorial Image 1">
+        <div id="tutorialText2" class="tutorialText">[Your Tutorial Text 2]</div>
+        <img id="tutorialImage2" src="" alt="Tutorial Image 2">
+        <div id="tutorialText3" class="tutorialText">[Your Tutorial Text 3]</div>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
