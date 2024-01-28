@@ -290,6 +290,13 @@
             document.getElementById('hostMenu').classList.add('hidden');
             document.getElementById('tutorialMenu').classList.add('hidden');
         
+function showMenu(menuType) {
+    // Hide all menus
+    document.getElementById('mainMenu').classList.add('hidden');
+    document.getElementById('playerMenu').classList.add('hidden');
+    document.getElementById('hostMenu').classList.add('hidden');
+    document.getElementById('tutorialMenu').classList.add('hidden');
+
             // Show specific menu
             if (menuType === 'player') {
                 const playerMenu = document.getElementById('playerMenu');
@@ -303,28 +310,27 @@
                 fadeInButtons(hostMenu);
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
-            }
-            if (menuType === 'tutorial') {
+            } else if (menuType === 'tutorial') {
                 const tutorialMenu = document.getElementById('tutorialMenu');
                 tutorialMenu.classList.remove('hidden');
                 fadeInButtons(tutorialMenu);
-        
+                
                 // Load tutorial content dynamically
                 updateTutorialText('tutorialText1', 'First text block content.');
                 updateTutorialImage('tutorialImage1', 'image1.png');
                 updateTutorialText('tutorialText2', 'Second text block content.');
                 updateTutorialImage('tutorialImage2', 'image2.png');
                 updateTutorialText('tutorialText3', 'Third text block content.');
-                    else {
-                        document.getElementById('mainMenu').classList.remove('hidden');
-                    }
-                
-                    // Clear image and number display when returning to main menu
-                    if (menuType === 'main') {
-                        document.getElementById('imageContainer').innerHTML = '';
-                        document.getElementById('numberDisplay').innerText = '';
-                    }
-                }
+            } else {
+                document.getElementById('mainMenu').classList.remove('hidden');
+            }
+            
+            // Clear image and number display when returning to main menu
+            if (menuType === 'main') {
+                document.getElementById('imageContainer').innerHTML = '';
+                document.getElementById('numberDisplay').innerText = '';
+            }
+        }
         
         function fadeInButtons(menu) {
             Array.from(menu.getElementsByTagName('button')).forEach(button => {
