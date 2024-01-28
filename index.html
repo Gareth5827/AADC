@@ -101,6 +101,10 @@
         #hostButton {
             animation: slideInFromTop 1s ease forwards;
         }
+
+                #tutorialButton {
+            animation: slideInFromRight 1s ease forwards;
+        }
         
         #imageContainer {
             display: flex;
@@ -140,10 +144,11 @@
     <div id="numberDisplay"></div>
     <div id="imageContainer"></div>
 
-    <!-- Main Menu -->
+    <!-- Main Menu - Add Tutorial Button -->
     <div class="centered hidden" id="mainMenu">
         <button id="playerButton" onclick="showMenu('player')">Player</button>
         <button id="hostButton" onclick="showMenu('host')">Host</button>
+        <button id="tutorialButton" onclick="showMenu('tutorial')">Tutorial</button>
     </div>
 
     <!-- Player Menu -->
@@ -155,6 +160,16 @@
     <!-- Host Menu -->
     <div class="centered hidden" id="hostMenu">
         <button id="rerollHostButton">Reroll scene</button>
+        <button onclick="showMenu('main')">Back</button>
+    </div>
+
+    <!-- Tutorial Menu -->
+    <div class="centered hidden" id="tutorialMenu">
+        <div id="tutorialText1">[Placeholder for Tutorial Text 1]</div>
+        <img id="tutorialImage1" src="" alt="Tutorial Image 1" style="width: 1536px; height: 864px;">
+        <div id="tutorialText2">[Placeholder for Tutorial Text 2]</div>
+        <img id="tutorialImage2" src="" alt="Tutorial Image 2" style="width: 1536px; height: 864px;">
+        <div id="tutorialText3">[Placeholder for Tutorial Text 3]</div>
         <button onclick="showMenu('main')">Back</button>
     </div>
 
@@ -190,7 +205,7 @@
             document.getElementById('mainMenu').classList.remove('hidden');
             document.getElementById('playerButton').style.animation = 'slideInFromLeft 1s ease forwards';
             document.getElementById('hostButton').style.animation = 'slideInFromTop 1s ease forwards';
-            document.getElementById('bothButton').style.animation = 'slideInFromRight 1s ease forwards';
+            document.getElementById('tutorialButton').style.animation = 'slideInFromRight 1s ease forwards';
         }
 
         function typeSubLetter() {
@@ -257,12 +272,23 @@
             displayImage(imageId);
             updateAvoidList(imageId); // You might want to handle avoid list differently for host
         }
+
+                function updateTutorialText(blockId, newText) {
+            const textBlock = document.getElementById(blockId);
+            textBlock.innerText = newText;
+        }
+        
+        function updateTutorialImage(imageId, newImageSrc) {
+            const imageElement = document.getElementById(imageId);
+            imageElement.src = 'images/' + newImageSrc;
+        }
         
         function showMenu(menuType) {
             // Hide all menus
             document.getElementById('mainMenu').classList.add('hidden');
             document.getElementById('playerMenu').classList.add('hidden');
             document.getElementById('hostMenu').classList.add('hidden');
+            document.getElementById('tutorialMenu').classList.add('hidden');
         
             // Show specific menu
             if (menuType === 'player') {
@@ -277,16 +303,28 @@
                 fadeInButtons(hostMenu);
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
-            } else {
-                document.getElementById('mainMenu').classList.remove('hidden');
             }
+            if (menuType === 'tutorial') {
+                const tutorialMenu = document.getElementById('tutorialMenu');
+                tutorialMenu.classList.remove('hidden');
+                fadeInButtons(tutorialMenu);
         
-            // Clear image and number display when returning to main menu
-            if (menuType === 'main') {
-                document.getElementById('imageContainer').innerHTML = '';
-                document.getElementById('numberDisplay').innerText = '';
-            }
-        }
+                // Load tutorial content dynamically
+                updateTutorialText('tutorialText1', 'First text block content.');
+                updateTutorialImage('tutorialImage1', 'image1.png');
+                updateTutorialText('tutorialText2', 'Second text block content.');
+                updateTutorialImage('tutorialImage2', 'image2.png');
+                updateTutorialText('tutorialText3', 'Third text block content.');
+                    else {
+                        document.getElementById('mainMenu').classList.remove('hidden');
+                    }
+                
+                    // Clear image and number display when returning to main menu
+                    if (menuType === 'main') {
+                        document.getElementById('imageContainer').innerHTML = '';
+                        document.getElementById('numberDisplay').innerText = '';
+                    }
+                }
         
         function fadeInButtons(menu) {
             Array.from(menu.getElementsByTagName('button')).forEach(button => {
