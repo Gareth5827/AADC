@@ -299,12 +299,15 @@
 
         // Reroll logic for the Host
         function rerollHost() {
-            const randomNumber = Math.floor(Math.random() * 3) + 1; // Generate a number from 1 to 3
+            const randomNumber = Math.floor(Math.random() * 3) + 1;
             document.getElementById('numberDisplay').innerText = randomNumber;
         
-            const imageId = getRandomHostImageId(); // Get random image ID for host
+            let imageId = getRandomHostImageId();
+            while (avoidList.includes(imageId)) {
+                imageId = getRandomHostImageId();
+            }
             displayImage(imageId);
-            updateAvoidList(imageId); // You might want to handle avoid list differently for host
+            updateAvoidList(imageId);
         }
 
                 function updateTutorialText(blockId, newText) {
@@ -335,12 +338,14 @@ function showMenu(menuType) {
                 fadeInButtons(playerMenu);
                 const rerollButton = document.getElementById('rerollPlayerButton');
                 rerollButton.onclick = rerollPlayer; // Attach rerollPlayer function to the button
+                rerollPlayer();
             } else if (menuType === 'host') {
                 const hostMenu = document.getElementById('hostMenu');
                 hostMenu.classList.remove('hidden');
                 fadeInButtons(hostMenu);
                 const rerollButton = document.getElementById('rerollHostButton');
                 rerollButton.onclick = rerollHost; // Attach rerollHost function to the button
+                rerollHost();
             } else if (menuType === 'tutorial') {
                 const tutorialMenu = document.getElementById('tutorialMenu');
                 tutorialMenu.classList.remove('hidden');
