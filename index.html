@@ -324,6 +324,10 @@ function showMenu(menuType) {
     document.getElementById('hostMenu').classList.add('hidden');
     document.getElementById('tutorialMenu').classList.add('hidden');
 
+    // Hide the image container when showing the tutorial menu
+    const imageContainer = document.getElementById('imageContainer');
+    imageContainer.style.display = (menuType === 'tutorial') ? 'none' : 'flex';
+
             // Show specific menu
             if (menuType === 'player') {
                 const playerMenu = document.getElementById('playerMenu');
