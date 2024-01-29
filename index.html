@@ -74,17 +74,26 @@
             margin: 0px; /* Increase spacing between buttons */
         }
 
-        #increaseTimer, #decreaseTimer, #startStopTimer {
-            position: relative; /* Enable relative positioning */
-            bottom: 30px; /* Move down by 40px */
+                #hostMenu {
+            position: relative;
         }
 
-        #startStopTimer {
-            left: 500px; /* Move -20px to the left */
+        #increaseTimer {
+            position: absolute;
+            bottom: 10px; /* Adjust as needed */
+            left: 50%; /* Adjust as needed */
         }
         
         #decreaseTimer {
-            right: -300px; /* Move 60px to the right */
+            position: absolute;
+            bottom: 10px; /* Adjust as needed */
+            right: 50%; /* Adjust as needed */
+        }
+        
+        #startStopTimer {
+            position: absolute;
+            bottom: 10px; /* Adjust as needed */
+            left: 40%; /* Adjust as needed */
         }
 
         .tutorialText {
@@ -241,8 +250,8 @@
         <!-- Timer Display -->
         <div id="timerDisplay" style="margin: 20px;">5:00</div>
         <!-- Timer Buttons -->
-        <button onclick="changeTimerA(-1)">Decrease timer</button>
-        <button onclick="changeTimerB(1)">Increase timer</button>
+        <button id="increaseTimer" onclick="changeTimer(1)">Increase timer</button>
+        <button id="decreaseTimer" onclick="changeTimer(-1)">Decrease timer</button>
         <button id="startStopTimer" onclick="toggleTimer()">Start timer</button>
     </div>
 
