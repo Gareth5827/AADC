@@ -47,13 +47,18 @@
             top: 80px; /* Adjust this value as needed to position from the top */
         }
 
-            #mainMenuTextBox {
-        display: none; /* Initially hidden */
-        margin: 20px auto; /* Centered with auto margins */
-        padding: 10px;
-        border: 1px solid black;
-        max-width: 600px;
-        text-align: center; /* Center the text inside the box */
+        #mainMenuTextBox {
+            display: none; /* Initially hidden */
+            position: absolute; /* Absolute positioning */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for exact centering */
+            margin: 0; /* Remove margin */
+            padding: 10px;
+            border: 1px solid black;
+            max-width: 600px;
+            text-align: center; /* Center the text inside the box */
+            z-index: 900; /* Ensure it's above other content but below menus */
         }
 
                 /* Timer styling */
@@ -65,6 +70,24 @@
         /* Timer buttons styling */
         #hostMenu button {
             margin: 10px; /* Increase spacing between buttons */
+        }
+
+        #hostMenu button {
+    position: relative; /* Enable relative positioning */
+}
+
+        #startStopTimer {
+            bottom: 10px;
+            left: -40px;
+        }
+        
+        #changeTimerA { /* Assuming this is your 'Increase timer' button */
+            bottom: 10px;
+        }
+        
+        #changeTimerB { /* Assuming this is your 'Decrease timer' button */
+            bottom: 10px;
+            right: -60px;
         }
 
         .tutorialText {
@@ -221,8 +244,8 @@
         <!-- Timer Display -->
         <div id="timerDisplay" style="margin: 20px;">5:00</div>
         <!-- Timer Buttons -->
-        <button onclick="changeTimer(-1)">Decrease timer</button>
-        <button onclick="changeTimer(1)">Increase timer</button>
+        <button onclick="changeTimerA(-1)">Decrease timer</button>
+        <button onclick="changeTimerB(1)">Increase timer</button>
         <button id="startStopTimer" onclick="toggleTimer()">Start timer</button>
     </div>
 
@@ -272,6 +295,8 @@
             document.getElementById('playerButton').style.animation = 'slideInFromLeft 1s ease forwards';
             document.getElementById('hostButton').style.animation = 'slideInFromTop 1s ease forwards';
             document.getElementById('tutorialButton').style.animation = 'slideInFromRight 1s ease forwards';
+                // Show the text box
+            document.getElementById('mainMenuTextBox').style.display = 'block';
         }
 
         function typeSubLetter() {
