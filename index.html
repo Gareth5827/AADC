@@ -47,6 +47,26 @@
             top: 80px; /* Adjust this value as needed to position from the top */
         }
 
+            #mainMenuTextBox {
+        display: none; /* Initially hidden */
+        margin: 20px auto; /* Centered with auto margins */
+        padding: 10px;
+        border: 1px solid black;
+        max-width: 600px;
+        text-align: center; /* Center the text inside the box */
+        }
+
+                /* Timer styling */
+        #timerDisplay {
+            margin-left: 20px; /* Move to the left */
+            font-size: 24px; /* Increase font size */
+        }
+        
+        /* Timer buttons styling */
+        #hostMenu button {
+            margin: 10px; /* Increase spacing between buttons */
+        }
+
         .tutorialText {
             max-width: 90%; /* You can adjust this value as needed */
             margin: 0 auto; /* Centers the text block */
@@ -332,11 +352,14 @@
             imageElement.src = 'images/' + newImageSrc;
         }
 
-            function changeTimer(change) {
-        timerValue += change;
-        timerValue = Math.max(0, Math.min(timerValue, 3)); // Ensure it's between 0 and 3
-        updateTimerDisplay();
-    }
+        function changeTimer(change) {
+            if (timerRunning) {
+                toggleTimer(); // Stop the timer if it's running
+            }
+            timerValue += change;
+            timerValue = Math.max(0, Math.min(timerValue, 3)); // Ensure it's between 0 and 3
+            updateTimerDisplay();
+        }
     
     function updateTimerDisplay() {
         let time;
@@ -382,8 +405,10 @@ function showMenu(menuType) {
     document.getElementById('playerMenu').classList.add('hidden');
     document.getElementById('hostMenu').classList.add('hidden');
     document.getElementById('tutorialMenu').classList.add('hidden');
-
-    // Hide the image container when showing the tutorial menu
+        // Show/hide the text box with the main menu
+    const textBox = document.getElementById('mainMenuTextBox');
+    textBox.style.display = (menuType === 'main') ? 'block' : 'none';
+        // Hide the image container when showing the tutorial menu
     const imageContainer = document.getElementById('imageContainer');
     imageContainer.style.display = (menuType === 'tutorial') ? 'none' : 'flex';
 
