@@ -76,18 +76,17 @@
     position: relative; /* Enable relative positioning */
 }
 
+        #increaseTimer, #decreaseTimer, #startStopTimer {
+            position: relative; /* Enable relative positioning */
+            bottom: 10px; /* Move down by 10px */
+        }
+
         #startStopTimer {
-            bottom: 10px;
-            left: -40px;
+            left: -40px; /* Move 40px to the left */
         }
         
-        #changeTimerA { /* Assuming this is your 'Increase timer' button */
-            bottom: 10px;
-        }
-        
-        #changeTimerB { /* Assuming this is your 'Decrease timer' button */
-            bottom: 10px;
-            right: -60px;
+        #decreaseTimer {
+            right: -60px; /* Move 60px to the right */
         }
 
         .tutorialText {
