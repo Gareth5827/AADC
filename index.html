@@ -184,6 +184,9 @@
         <button id="hostButton" onclick="showMenu('host')">Host</button>
         <button id="tutorialButton" onclick="showMenu('tutorial')">Tutorial</button>
     </div>
+        <div id="mainMenuTextBox" style="margin: 20px; padding: 10px; border: 1px solid black; max-width: 600px;">
+        Welcome to AADC! Customize this text as needed.
+        </div>
 
     <!-- Player Menu -->
     <div class="centered hidden" id="playerMenu">
@@ -195,6 +198,12 @@
     <div class="centered hidden" id="hostMenu">
         <button id="rerollHostButton">Reroll scene</button>
         <button onclick="showMenu('main')">Back</button>
+        <!-- Timer Display -->
+        <div id="timerDisplay" style="margin: 20px;">5:00</div>
+        <!-- Timer Buttons -->
+        <button onclick="changeTimer(-1)">Decrease timer</button>
+        <button onclick="changeTimer(1)">Increase timer</button>
+        <button id="startStopTimer" onclick="toggleTimer()">Start timer</button>
     </div>
 
     <!-- Tutorial Menu -->
@@ -219,6 +228,9 @@
         const baseHeight = 1080; // Base height of the image
         const imageScale = 0.90; // Scale of the image (1 for 100%)
         let mainIndex = 0, subIndex = 0;
+        let timerValue = 2;
+        let countdown;
+        let timerRunning = false;
 
         function typeMainLetter() {
             if (mainIndex < mainText.length) {
@@ -319,6 +331,50 @@
             const imageElement = document.getElementById(imageId);
             imageElement.src = 'images/' + newImageSrc;
         }
+
+            function changeTimer(change) {
+        timerValue += change;
+        timerValue = Math.max(0, Math.min(timerValue, 3)); // Ensure it's between 0 and 3
+        updateTimerDisplay();
+    }
+    
+    function updateTimerDisplay() {
+        let time;
+        switch(timerValue) {
+            case 0: time = '1:00'; break;
+            case 1: time = '2:30'; break;
+            case 2: time = '5:00'; break;
+            case 3: time = '10:00'; break;
+        }
+        document.getElementById('timerDisplay').innerText = time;
+    }
+    
+    function toggleTimer() {
+        if (timerRunning) {
+            clearInterval(countdown);
+            updateTimerDisplay();
+            document.getElementById('startStopTimer').innerText = 'Start timer';
+        } else {
+            let time = document.getElementById('timerDisplay').innerText.split(':');
+            let minutes = parseInt(time[0]);
+            let seconds = parseInt(time[1]);
+            countdown = setInterval(function() {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                }
+                if (minutes < 0) {
+                    clearInterval(countdown);
+                    minutes = 0;
+                    seconds = 0;
+                }
+                document.getElementById('timerDisplay').innerText = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            }, 1000);
+            document.getElementById('startStopTimer').innerText = 'Stop timer';
+        }
+        timerRunning = !timerRunning;
+    }
         
 function showMenu(menuType) {
     // Hide all menus
