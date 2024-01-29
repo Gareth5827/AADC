@@ -59,6 +59,8 @@
             max-width: 600px;
             text-align: center; /* Center the text inside the box */
             z-index: 900; /* Ensure it's above other content but below menus */
+            animation: fadeIn 1s ease forwards;
+            opacity: 0; /* Start with the box invisible */
         }
 
                 /* Timer styling */
@@ -78,15 +80,15 @@
 
         #increaseTimer, #decreaseTimer, #startStopTimer {
             position: relative; /* Enable relative positioning */
-            bottom: 10px; /* Move down by 10px */
+            bottom: 20px; /* Move down by 10px */
         }
 
         #startStopTimer {
-            left: -40px; /* Move 40px to the left */
+            left: -10px; /* Move 40px to the left */
         }
         
         #decreaseTimer {
-            right: -60px; /* Move 60px to the right */
+            right: -100px; /* Move 60px to the right */
         }
 
         .tutorialText {
@@ -307,7 +309,11 @@
                 subIndex++;
                 setTimeout(typeSubLetter, 75);
             } else {
-                setTimeout(revealMenu, 500); // Small delay before revealing the menu
+                setTimeout(function() {
+                    revealMenu();
+                    // Trigger the fade-in of the text box
+                    document.getElementById('mainMenuTextBox').style.display = 'block';
+                }, 500); // Small delay before revealing the menu and text box
             }
         }
         
