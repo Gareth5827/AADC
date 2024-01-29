@@ -230,7 +230,7 @@
         <button id="tutorialButton" onclick="showMenu('tutorial')">Tutorial</button>
     </div>
         <div id="mainMenuTextBox" style="margin: 20px; padding: 10px; border: 1px solid black; max-width: 600px;">
-        Welcome to AADC! Customize this text as needed.
+Hello there and welcome to aaaand ACTION: Directors Cut. If this is your first time here, take a look at the tutorial page. If this isn't your first time, or you don't care about the tutorial, jump right in! If you want a version with BONUS CHARACTERS check out the version on <a href="https://www.figma.com/proto/umE9uQNTcuqVr0ef63twmK/AADC?type=design&node-id=6-4&t=PJnFh3OMk7D0ITXk-1&scaling=contain&page-id=0%3A1&starting-point-node-id=6%3A21&mode=design" target="_blank">Figma</a>!
         </div>
 
     <!-- Player Menu -->
@@ -362,6 +362,14 @@
 
         // Reroll logic for the Host
         function rerollHost() {
+                        // Reset the timer
+            if (timerRunning) {
+                clearInterval(countdown);
+                timerRunning = false;
+                document.getElementById('startStopTimer').innerText = 'Start timer';
+            }
+            timerValue = 2; // Default timer value
+            updateTimerDisplay();
             const randomNumber = Math.floor(Math.random() * 3) + 1;
             document.getElementById('numberDisplay').innerText = randomNumber;
         
